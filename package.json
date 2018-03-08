@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "node ./bin/www",
+        "start": "nodemon ./bin/www",
         "compile": "node compile.js",
         "deploy": "node deploy.js"
     },
@@ -11,9 +11,12 @@
         "body-parser": "~1.18.2",
         "cookie-parser": "~1.4.3",
         "debug": "~2.6.9",
+        "eth-crypto": "^0.2.0",
         "express": "~4.15.5",
         "hbs": "~4.0.1",
         "morgan": "~1.9.0",
-        "serve-favicon": "~2.4.5"
+        "serve-favicon": "~2.4.5",
+        "solc": "^0.4.21",
+        "truffle": "^4.1.3"
     }
 }
