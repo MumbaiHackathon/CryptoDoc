@@ -30,12 +30,14 @@ console.log('Private: ' + privateKey.toString('hex'))
 console.log('Public: ' + publicKey.toString('hex'))
 console.log('Address: ' + address.toString('hex'))
 
+console.log('---');
+
 var text = Buffer('Aadhar no 8023842048');
 var unCompressedPublicKey = eccrypto.getPublic(privateKey);
 eccrypto.encrypt(unCompressedPublicKey, Buffer(text)).then(function(encrypted) { 
   console.log('Cipher Text: ' + encrypted.ciphertext.toString('hex')); 
-  console.log(encrypted);
   eccrypto.decrypt(privateKey, encrypted).then(function(plain) {
     console.log('Decrypted text: ' + plain.toString());
   });
 });
+
