@@ -1,3 +1,32 @@
+/*
+ *  ---> Overview of the whole process 
+ *  Assume data is created by the government and stored on the blockchain
+ *    string encryptedData (encrypted using public key of the owner)
+ *    string ownerAddress
+ *    string hashOfPlainData
+ *
+ *  --> Owner has to send the data to the receiver :
+ *  1) Get encrypted data from blockchain
+ *  2) Decrypt using his own private key
+ *  3) Sign the plain text using the signature function below using his private key
+ *  4) Encrypt the plain text using the receiver's public key
+ *  5) Send - his own public key, the signature as well as the encrypted data to the receiver
+ *
+ *  --> On the receiver side :
+ *  1) Receive the sender's public key, encrypted data and signature from sender (say from firebase)
+ *  2) Decrypt the data using his own private key
+ *  3) Get the hash of the plain text data stored on the blockchain
+ *  4) Hash the decrypted data using the sha256 library and compare for equality.
+ *  5) Break if they do not match, else continue
+ *  6) Recover the address from the signature using the public key of the sender using the function below
+ *  7) Check if it's the same address as the one he asked for.
+ *  8) If it's the same, data is authentic, else its manipulated in some way.
+ *
+ *  --------> I don't even know why do we even need to sign the data since only the legit owner can decrypt and reencrypt the
+ *  data so that the hashes match - :| , but it's there anyways.
+ *
+ */
+
 const bip39     = require('bip39');
 const hdkey     = require('ethereumjs-wallet/hdkey');
 const EthCrypto = require('eth-crypto');
@@ -95,6 +124,3 @@ EthCrypto.encryptWithPublicKey(publicKey, plainData)
   .then( (encryptedData) => {
     console.log('Encrypted Data: ',encryptedData);
   });
-
-
-
