@@ -1,0 +1,13 @@
+.chatbot-hover-button {
+    min-width: 80px;
+    min-height: 80px;
+    bottom: 25px;
+    right: 50px;
+    position: absolute;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(60deg, #66bb6a, #43a047);
+    color: white;
+}
