@@ -49,3 +49,12 @@ function verify(type='success'){
     );
 
 }
+
+
+function addRow(){
+    var test = $('#sample-row');
+    
+    test = test.html();
+
+    $('#container-rows').append(test);
+}

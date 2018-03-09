@@ -43,13 +43,13 @@
                             <p>Dashboard</p>
                         </a>
                     </li>        
-                    <li class="active">
+                    <li >
                         <a href="verify.html">
                             <i class="material-icons">spellcheck</i>
                             <p>Verify</p>
                         </a>
                     </li>      
-                    <li>
+                    <li class="active">
                         <a href="create.html">
                             <i class="material-icons">create</i>
                             <p>Create</p>
@@ -112,35 +112,68 @@
                 </div>
             </nav>
             <div class="content">
-               <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div id="info_holder" class="hidden animated bounceInRight card">
-                            <div class="card-header" data-background-color="green">
-                                <h4 class="title">Verified Data</h4>
-                                <p class="category">You can trust this to be legitimate.</p>
-                            </div>
-                            <div class="card-content">
-                                <h4 class="card-title">Key 1</h4>
-                                <p class="card-content">
-                                    Value 1
-                                </p>
-                                <br>
-                                <h4 class="card-title">Key 2</h4>
-                                <p class="card-content">
-                                    Value 2
-                                </p>
-                                <br>
-                                <h4 class="card-title">Key 3</h4>
-                                <p class="card-content">
-                                    Value 3
-                                </p>
+                    <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="card">
+                                        <div class="card-header" data-background-color="purple">
+                                            <h4 class="title">Create Document</h4>
+                                            <p class="category">Enter fields and values </p>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="row">
+                                                    <div id="sample-button" onclick="addRow()" style="z-index: 999" class="col-md-4">
+                                                            <button style="margin-top:30px" class="btn btn-sm btn-primary" >Add Row </button>
+                                                    </div>  
+                                            </div>
+                                                <div id="container-rows">
+                                                    <div id="sample-row">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group label-floating">
+                                                                    <label class="control-label">Key</label>
+                                                                    <input type="text" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group label-floating">
+                                                                    <label class="control-label">Value </label>
+                                                                    <input type="email" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                    
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                                
+                                                <button type="submit" class="btn btn-primary pull-right">Create Document</button>
+                                                <div class="clearfix"></div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-4">
+                                    <div class="card card-profile">
+                                        <div class="card-avatar">
+                                            <a href="#pablo">
+                                                <img class="img" src="../assets/img/faces/marc.jpg" />
+                                            </a>
+                                        </div>
+                                        <div class="content">
+                                            <h6 class="category text-gray">CEO / Co-Founder</h6>
+                                            <h4 class="card-title">Alec Thompson</h4>
+                                            <p class="card-content">
+                                                Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                                            </p>
+                                            <a href="#pablo" class="btn btn-primary btn-round">Follow</a>
+                                        </div>
+                                    </div>
+                                </div> -->
                             </div>
                         </div>
-                    </div>
-
-                </div>
-               </div>
             </div>
 
         </div>
@@ -173,7 +206,7 @@
     $(document).ready(function() {
 
         // Javascript method's body can be found in assets/js/demos.js
-       verify();
+       //verify();
     });
 </script>
 
