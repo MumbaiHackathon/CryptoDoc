@@ -9,6 +9,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var verify = require('./routes/verify');
 var create = require('./routes/create');
+var send = require('./routes/send');
 var Preferences = require("preferences");
 var prefs = new Preferences('cryptodoc');
 
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/verify', verify);
 app.use('/create', create);
+app.use('/send', send);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

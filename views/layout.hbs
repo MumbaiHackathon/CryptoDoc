@@ -49,6 +49,18 @@
   <script src="../js/custom.js"></script>
   <script src="../js/jquery.slimscroll.min.js"></script>
   <script src="../js/sweetalert.min.js"></script>
-  <script>console.log("{{address}}")</script>
+  <script>
+    console.log("{{address}}");
+    console.log(window.location.pathname);
+    if(window.location.pathname == '/' || window.location.pathname == '/index' ){
+      getTransactions();
+    }
+    if(window.location.pathname == '/verify'){
+      verify('success',data);
+    }
+    
+
+    
+  </script>
   <script>console.log(JSON.parse("{{abi}}".replace(/&quot;/g,'"'))[0])</script>
 </html>
