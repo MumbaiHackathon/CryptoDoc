@@ -55,3 +55,46 @@ const encryptedData = {
  */
 const hashStoredOnTheBlockChain = '2ee7e99f148b03ae2a998da1ba2ef667de20e6fa8dc98d19552a586efcf3c503';
 
+/*
+ *
+ *  Sign the plaintext using the sender's private key to authenticate that he is the legitimate owner of the data he is
+ *  sending
+ *
+ */
+const signature = EthCrypto.sign(privateKey, plainData);
+console.log('Signature of the message: ', signature);
+
+/*
+ *
+ *  Recover the address from the sender's signature and the decrypted plain data and match it against the one stored on
+ *  the block chain. If it's the same, then the sender is the actual owner of the information he sent.
+ *
+ */
+const addressRecovered = EthCrypto.recover(signature, plainData);
+console.log('Address is the same as the address recovered: ', address == addressRecovered)
+
+
+/*
+ *
+ *  Function to decrypt data
+ *
+ */
+EthCrypto.decryptWithPrivateKey(privateKey, encryptedData)
+  .then( (decryptedData) => {
+    hashDecrypted = sha256(decryptedData);
+    console.log('Hashesh Match with the Hash on the block chain: ', hashDecrypted == hashStoredOnTheBlockChain);
+  });
+
+
+/*
+ *
+ *  Funcrion to encrypt data
+ *
+ */
+EthCrypto.encryptWithPublicKey(publicKey, plainData)
+  .then( (encryptedData) => {
+    console.log('Encrypted Data: ',encryptedData);
+  });
+
+
+
