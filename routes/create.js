@@ -2,8 +2,8 @@ var express = require("express");
 var router = express.Router();
 
 /* GET home page. */
-router.get("/", function(req, res, next) {
-    res.send('Add buttons to choose which document to create here');
+router.get('/', function(req, res, next) {
+    res.render('create', { title: 'Create' });
 });
 
 router.get('/aadhar', (req, res) => {

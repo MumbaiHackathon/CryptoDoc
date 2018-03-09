@@ -6526,11 +6526,14 @@ footer .btn {
     .off-canvas-sidebar .table-responsive {
         width: 100%;
         margin-bottom: 15px;
+        max-height:100px !important;
         overflow-x: scroll;
-        overflow-y: hidden;
+        overflow-y: scroll;
         -ms-overflow-style: -ms-autohiding-scrollbar;
         -webkit-overflow-scrolling: touch;
     }
+
+    
     .form-group .form-control {
         font-size: 16px;
         height: 37px;
