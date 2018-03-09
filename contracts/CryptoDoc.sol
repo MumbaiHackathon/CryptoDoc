@@ -1,11 +1,8 @@
+pragma solidity^0.4.17;
 
 contract CryptoDoc {
     address private manager;
     address[] public documents;
-
-    event TransactionInfo(
-        bytes32 txhash
-    );
     
     modifier onlyManager() {
         require(msg.sender == manager);
@@ -28,7 +25,8 @@ contract Document {
     address owner;
     bytes32 data;
     
-    function Document(bytes32 _key, address _owner, string _data) public{
+    function Document(bytes32 _key, address _owner, string _data) public {
+        key = _key;
         owner = _owner;
         data = keccak256(_data);
     }
