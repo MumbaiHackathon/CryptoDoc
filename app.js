@@ -9,8 +9,12 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var verify = require('./routes/verify');
 var create = require('./routes/create');
+var Preferences = require("preferences");
+var prefs = new Preferences('cryptodoc');
 
 var app = express();
+app.locals.address = prefs.address;
+app.locals.abi = prefs.abi;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
