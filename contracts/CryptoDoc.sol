@@ -1,35 +1,36 @@
- pragma solidity^0.4.17;
 
 contract CryptoDoc {
+    address private manager;
+    address[] public documents;
 
     event TransactionInfo(
-        address account
+        bytes32 txhash
     );
-
-    function create_document(string owner, string hash, string data)view public returns(address){
-        address d = new Document(owner,hash,data);
-        TransactionInfo(d);
-        return d;
+    
+    modifier onlyManager() {
+        require(msg.sender == manager);
+        _;
+    }
+    
+    function CryptoDoc() public {
+        manager = msg.sender;
+    }
+    
+    function createDocument(bytes32 _key, address _owner, string _data) public onlyManager {
+        address newDocument = new Document(_key, _owner, _data);
+        documents.push(newDocument);
     }
 
 }
 
 contract Document {
-    string public owner;
-    address creator;
-    string hash;
-    string data;
-
-    function Document(string owner, string hash, string data) {
-        creator = msg.sender;
+    bytes32 public key;
+    address owner;
+    bytes32 data;
+    
+    function Document(bytes32 _key, address _owner, string _data) public{
+        owner = _owner;
+        data = keccak256(_data);
     }
-
-    function set_owner(string account) view public returns(address){
-        owner = account;
-    }
-
-    function set_data(string _data) view public returns(address){
-        data = _data;
-    }
-
+    
 }
