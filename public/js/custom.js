@@ -82,31 +82,31 @@ function getTransactions(){
         'rows': [
             {
                 'txid': 'txid1',
-                'datetime': 'datetime1',                
+                'datetime': 'datetime1',
             },
             {
                 'txid': 'txid2',
-                'datetime': 'datetime2',                
+                'datetime': 'datetime2',
             },
             {
                 'txid': 'txid3',
-                'datetime': 'datetime3',                
+                'datetime': 'datetime3',
             },
             {
                 'txid': 'txid4',
-                'datetime': 'datetime4',                
+                'datetime': 'datetime4',
             },
             {
                 'txid': 'txid5',
-                'datetime': 'datetime5',                
+                'datetime': 'datetime5',
             },
             {
                 'txid': 'txid6',
-                'datetime': 'datetime6',                
+                'datetime': 'datetime6',
             },
             {
                 'txid': 'txid7',
-                'datetime': 'datetime7',                
+                'datetime': 'datetime7',
             },
         ]
     } //get this from localStorage, this is for testing
@@ -119,7 +119,7 @@ function getTransactions(){
         <td>${datetime}</td></tr>`;
         $('#tableinsert').append(html);
     });
-        
+
 }//getTransaction end
 
 data = {
@@ -145,5 +145,5 @@ function createData(){
 
 /* global $ */
 
-    
+
 
