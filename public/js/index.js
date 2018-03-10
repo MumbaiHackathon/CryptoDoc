@@ -12,6 +12,4 @@ let CryptoContract = web3.eth.contract(abi);
 
 
 
-let Crypto = CryptoContract.at(address);
-
 console.log(Crypto)
