@@ -86,7 +86,7 @@ function verify(type = 'success', data) {
     // console.log(data_to_be_shown);
     for (key in data) {
         let html = `<h4 class="card-title">${key}</h4>
-        <p class="card-content">
+        <p class="card-content wrap">
             ${data[key]}
         </p>
         <br>`;
@@ -175,17 +175,19 @@ function submit(id) {
 
 function getTransactions() {
     result = [];
-    i = 0;
+    
     txid = localStorage.getItem('transactions').split(",");
     datetime = localStorage.getItem('datetime').split(",");
-    txid.forEach(element => {
-
+    for(i=txid.length-1; i>=0; i--){
         let html = `<tr>
-        <td><a target="_blank" href="https://rinkeby.etherscan.io/tx/${element}">${element.slice(0,50)+"..."}</a></td>
+        <td><a target="_blank" href="https://rinkeby.etherscan.io/tx/${txid[i]}">${txid[i].slice(0,50)+"..."}</a></td>
         <td>${new Date(parseInt((datetime[i]))).toLocaleString()}</td></tr>`;
         $('#tableinsert').append(html);
-        i++;
-    });
+        
+    }
+
+        
+    
 } //getTransaction end
 
 

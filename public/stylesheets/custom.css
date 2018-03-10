@@ -26,3 +26,7 @@
 .bg-green {
     background: linear-gradient(60deg, #66bb6a, #43a047);
 }
+
+.wrap{
+    word-wrap: break-word;
+}
