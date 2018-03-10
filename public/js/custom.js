@@ -28,8 +28,8 @@ var config = {
   }
 
 
-  
-  
+
+
   function verify(type='success',data){
       retrieve();
     swal({
@@ -133,9 +133,9 @@ function getTransactions(){
     txid = localStorage.getItem('transactions').split(",");
     datetime = localStorage.getItem('datetime').split(",");
     txid.forEach(element => {
-        
+
         let html = `<tr>
-        <td><a href="https://rinkeby.etherscan.io/tx/${element}">${element}</a></td>
+        <td><a href="https://rinkeby.etherscan.io/tx/${element}">${element.slice(0,50)+"..."}</a></td>
         <td>${new Date(parseInt((datetime[i]))).toLocaleString()}</td></tr>`;
         $('#tableinsert').append(html);
         i++;
@@ -160,7 +160,11 @@ publicKey  = EthCrypto.publicKeyByPrivateKey(privateKey);
 address    = EthCrypto.addressByPublicKey(publicKey);
 
 
+
+
 function createData(){
+ var transactions = localStorage.getItem("transactions").split(",")
+var datetime = localStorage.getItem("datetime").split(",")
     result = {}
     let rows = $('#container-rows').children();
     for(let row of rows){
@@ -172,9 +176,15 @@ function createData(){
 
 var hash = sha256(JSON.stringify(result))
 var owner_public_key = result["Public_Key"]
+
 EthCrypto.encryptWithPublicKey(result["Public_Key"],JSON.stringify(result)).then(
     data=>{
-        Crypto.createDocument(owner_public_key,JSON.stringify(data),hash)
+        Crypto.createDocument(owner_public_key,JSON.stringify(data),hash,function(e,d){
+            transactions.push(d);
+            datetime.push(String(Date.now()));
+localStorage.setItem("datetime",String(datetime))
+localStorage.setItem("transactions",String(transactions))
+        })
         console.log(data)
     }
 )

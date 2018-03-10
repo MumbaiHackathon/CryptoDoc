@@ -22,9 +22,9 @@ contract CryptoDoc {
 
 contract Document {
   address creator;
-  string encrypted_data;
-  string hash_of_plain_data;
-  string public_key_of_owner;
+  string public encrypted_data;
+  string public hash_of_plain_data;
+  string public public_key_of_owner;
 
   function Document(string _public_key_of_owner, string _encrypted_data, string _hash_of_plain_data) public {
     creator = msg.sender;
