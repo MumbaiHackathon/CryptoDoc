@@ -136,7 +136,7 @@ function getTransactions(){
         
         let html = `<tr>
         <td><a href="https://rinkeby.etherscan.io/tx/${element}">${element}</a></td>
-        <td>${Date(parseInt(datetime[i]))}</td></tr>`;
+        <td>${new Date(parseInt((datetime[i]))).toLocaleString()}</td></tr>`;
         $('#tableinsert').append(html);
         i++;
     });
