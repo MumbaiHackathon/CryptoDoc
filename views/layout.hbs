@@ -55,9 +55,11 @@
     if(window.location.pathname == '/' || window.location.pathname == '/index' ){
       getTransactions();
       $('.chatbot-hover-button').on('click', function() {
-        $('.chatbot-dialog').toggleClass('hidden');
+        $('.chatbot-dialog').toggleClass('hidden animated bounceInUp');
+        $('.chatbot-hover-button').addClass('animated rubberBand');
         $('.chatbot-hover-button').toggleClass('bg-green bg-red');
         if($('.chatbot-hover-button').hasClass('bg-red'))
+            
             $('.chatbot-hover-button i').html('close');
         else
             $('.chatbot-hover-button i').html('chat');
