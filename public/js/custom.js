@@ -210,6 +210,12 @@ function createData() {
                 datetime.push(String(Date.now()));
                 localStorage.setItem("datetime", String(datetime))
                 localStorage.setItem("transactions", String(transactions))
+                swal({
+                    title: "Success!",
+                    text: "Successfully created document...",
+                    type: "success",
+                    },
+                );
             })
             console.log(data)
         }
