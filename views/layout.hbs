@@ -52,12 +52,19 @@
     <script src="../js/custom.js"></script>
     <script src="../js/jquery.slimscroll.min.js"></script>
     <script src="../js/sweetalert.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
     <script>
         // console.log(window.location.pathname);
         if(window.location.pathname == '/' || window.location.pathname == '/index' ){
             getTransactions();
+            window.sr = ScrollReveal({ 
+                reset: true,
+                origin: 'top',
+                distance:'100px',
+             });
+            sr.reveal('.foo');
+            sr.reveal('.bar');
+
             $('.chatbot-hover-button').on('click', function() {
                 $('.chatbot-dialog').toggleClass('hidden animated bounceInUp');
                 $('.chatbot-hover-button').addClass('animated rubberBand');
@@ -68,9 +75,49 @@
                     else
                         $('.chatbot-hover-button i').html('chat');
             });
+            $(window).scroll(function(){
+                
+                if(window.scrollY > 500){
+                $('#sidebar').removeClass("hidden");
+                if($('#sidebar').hasClass("bounceOutLeft")){
+                        $('#sidebar').removeClass("bounceOutLeft");
+                }
+                $('#sidebar').addClass("animated bounceInLeft");
+                }else{
+                    if($('#sidebar').hasClass("bounceInLeft")){
+                        $('#sidebar').removeClass("bounceInLeft");
+                        $('#sidebar').addClass("bounceOutLeft");
+                    }
+                }
+                
+            });
+            
         }
 
 
+    </script>
+    <script>
+	$(function () { // wait for document ready
+		// init
+		var controller = new ScrollMagic.Controller({
+			globalSceneOptions: {
+				triggerHook: 'onLeave'
+			}
+		});
+
+		// get all slides
+		var slides = document.querySelectorAll("section.pnel");
+
+		// create scene for every slide
+		for (var i=0; i<slides.length; i++) {
+			new ScrollMagic.Scene({
+					triggerElement: slides[i]
+				})
+				.setPin(slides[i])
+				.addIndicators() // add indicators (requires plugin)
+				.addTo(controller);
+		}
+	});
     </script>
 
 
