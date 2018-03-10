@@ -19,14 +19,19 @@ var config = {
             data: result.data,
             type: result.type
     });
-
-    dbRef.on('child_added', (snapshot) => {
-        console.log(snapshot.val());
-    });
   };
+
+  function retrieve() {
+      dbRef.on("child_added", (snap) => {
+        console.log(snap.val());
+      });
+  }
+
+
   
   
   function verify(type='success',data){
+      retrieve();
     swal({
         title: "Fetching data",
         text: "Recieving encrypted data..",
