@@ -118,6 +118,9 @@ function addRow(){
 
 function submit(id){
     var index = -1;
+    var data={};
+    var doc = "";
+    var doc_add="";
     if(id == 'aadhar'){
          index = 0;
     }
@@ -137,7 +140,17 @@ function submit(id){
         'data': data,
     }
 
-    console.log(index)
+    console.log("index",index)
+    Crypto.documents(0,function (e,doc_add){
+        DocumentContract.at(doc_add).encrypted_data(function(e,doc){
+            EthCrypto.decryptWithPrivateKey(privateKey,JSON.parse(doc)).then(d => (EthCrypto.encryptWithPublicKey(address,d).then(
+                (data)=>send({'address':address,'type':type,'data':data}))));
+        })
+
+
+    })
+
+
     // send(result);
 }
 
