@@ -60,8 +60,26 @@ function verify(type='success',data){
 
 
 function addRow(){
-    test = $('#sample').html();
-    html = `<div class="row">${test}</div>`;
+
+    html = `
+
+                                                        <div id="sample" class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group label-floating">
+                                                                    <label class="control-label">Key </label>
+                                                                    <input type="text" class="form-control ">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group label-floating">
+                                                                    <label class="control-label">Value </label>
+                                                                    <input type="text" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+`;
     $('#container-rows').append(html);
 }
 

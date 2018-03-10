@@ -10,7 +10,7 @@ web3.eth.defaultAccount = web3.eth.accounts[0];
 var abi = abi;
 let CryptoContract = web3.eth.contract(abi);
 
-let Crypto = CryptoContract.at(address);
+
 
 let Crypto = CryptoContract.at(address);
 
