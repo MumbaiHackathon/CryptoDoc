@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "node compile && node deploy && nodemon ./bin/www",
+        "start": "nodemon ./bin/www",
         "compile": "node compile.js",
         "deploy": "node deploy.js"
     },
