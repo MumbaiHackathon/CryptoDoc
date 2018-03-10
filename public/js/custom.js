@@ -156,11 +156,11 @@ function submit(id) {
                 swal({
                     title: "Data Sent!",
                     text: "Successfully sent document...",
-                    type: "success", 
+                    type: "success",
                 });
             }
             )));
-                
+
         })
 
 
@@ -184,7 +184,6 @@ function getTransactions() {
         i++;
     });
 } //getTransaction end
-
 
 
 
