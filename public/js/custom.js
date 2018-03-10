@@ -29,7 +29,7 @@ function retrieve() {
 
 
 function verify(type = 'success', data) {
-    retrieve();
+    
     swal({
             title: "Fetching data",
             text: "Recieving encrypted data..",
@@ -78,8 +78,7 @@ function verify(type = 'success', data) {
             );
         }
     );
-  data_to_be_shown = {};
-EthCrypto.decryptWithPrivateKey(privateKey,fb['5813d4f8d84c5764b1afddb1eb284351e536754343d7add428c9e8460f76df03deff124704ea538708d68aee3f5e41b5b68a381eb994f3d4b859a0bfcd598aad']['data']).then((data) => data_to_be_shown=JSON.parse(data))
+  
 
     // console.log(data_to_be_shown);
     for (key in data_to_be_shown) {
@@ -91,6 +90,13 @@ EthCrypto.decryptWithPrivateKey(privateKey,fb['5813d4f8d84c5764b1afddb1eb284351e
         $('#verifyinsert').append(html);
     }
 
+}
+
+function verify_run(){
+    retrieve();
+    data_to_be_shown = {};
+    EthCrypto.decryptWithPrivateKey(privateKey,fb['5813d4f8d84c5764b1afddb1eb284351e536754343d7add428c9e8460f76df03deff124704ea538708d68aee3f5e41b5b68a381eb994f3d4b859a0bfcd598aad']['data']).then((data) => data_to_be_shown=JSON.parse(data))
+    verify('success',data_to_be_shown);
 }
 
 
@@ -179,11 +185,6 @@ function getTransactions() {
     });
 } //getTransaction end
 
-data = {
-        'key1': 'value1',
-        'key2': 'value1',
-        'key3': 'value1',
-    } //test data for verify display
 
 
 
