@@ -143,7 +143,15 @@ function submit(id) {
     Crypto.documents(0, function(e, doc_add) {
         DocumentContract.at(doc_add).encrypted_data(function(e, doc) {
             EthCrypto.decryptWithPrivateKey(privateKey, JSON.parse(doc)).then(d => (EthCrypto.encryptWithPublicKey(address, d).then(
-                (data) => send({ 'address': address, 'type': type, 'data': data }))));
+                (data) => {send({ 'address': address, 'type': type, 'data': data })
+                swal({
+                    title: "Data Sent!",
+                    text: "Successfully sent document...",
+                    type: "success", 
+                });
+            }
+            )));
+                
         })
 
 
