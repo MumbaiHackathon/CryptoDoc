@@ -21,7 +21,7 @@ function send(result) {
 };
 
 function retrieve() {
-    dbRef.on("change", (snap) => {
+    dbRef.on("value", (snap) => {
         console.log(snap.val());
     });
 }
@@ -33,7 +33,7 @@ function verify(type = 'success', data) {
             title: "Fetching data",
             text: "Recieving encrypted data..",
             imageUrl: '../img/loading.gif',
-            timer: 3000,
+            timer: 1500,
             showConfirmButton: false,
         },
         function() {
@@ -41,7 +41,7 @@ function verify(type = 'success', data) {
                     title: "Fetching public key",
                     text: "Fetching public key from sender..",
                     imageUrl: '../img/loading.gif',
-                    timer: 3000,
+                    timer: 1500,
                     showConfirmButton: false,
                 },
                 function() {
@@ -49,7 +49,7 @@ function verify(type = 'success', data) {
                             title: "Decrypting data",
                             text: "Decrypting data using key...",
                             imageUrl: '../img/loading.gif',
-                            timer: 3000,
+                            timer: 1500,
                             showConfirmButton: false,
                         },
                         function() {
@@ -77,10 +77,12 @@ function verify(type = 'success', data) {
             );
         }
     );
-    for (key in data) {
+    data_to_be_shown = { key1: "value1", key2: "value1", Yash: "Puthran" };
+    console.log(data_to_be_shown);
+    for (key in data_to_be_shown) {
         let html = `<h4 class="card-title">${key}</h4>
         <p class="card-content">
-            ${data[key]}
+            ${data_to_be_shown[key]}
         </p>
         <br>`;
         $('#verifyinsert').append(html);
@@ -115,11 +117,11 @@ function addRow() {
 
 function submit(id) {
     var index = -1;
-    var data={};
+    var data = {};
     var doc = "";
-    var doc_add="";
-    if(id == 'aadhar'){
-         index = 0;
+    var doc_add = "";
+    if (id == 'aadhar') {
+        index = 0;
     }
 
     if (id == 'pan') {
@@ -137,11 +139,11 @@ function submit(id) {
         'data': data,
     }
 
-    console.log("index",index)
-    Crypto.documents(0,function (e,doc_add){
-        DocumentContract.at(doc_add).encrypted_data(function(e,doc){
-            EthCrypto.decryptWithPrivateKey(privateKey,JSON.parse(doc)).then(d => (EthCrypto.encryptWithPublicKey(address,d).then(
-                (data)=>send({'address':address,'type':type,'data':data}))));
+    console.log("index", index)
+    Crypto.documents(0, function(e, doc_add) {
+        DocumentContract.at(doc_add).encrypted_data(function(e, doc) {
+            EthCrypto.decryptWithPrivateKey(privateKey, JSON.parse(doc)).then(d => (EthCrypto.encryptWithPublicKey(address, d).then(
+                (data) => send({ 'address': address, 'type': type, 'data': data }))));
         })
 
 
@@ -159,7 +161,7 @@ function getTransactions() {
     txid.forEach(element => {
 
         let html = `<tr>
-        <td><a href="https://rinkeby.etherscan.io/tx/${element}">${element.slice(0,50)+"..."}</a></td>
+        <td><a target="_blank" href="https://rinkeby.etherscan.io/tx/${element}">${element.slice(0,50)+"..."}</a></td>
         <td>${new Date(parseInt((datetime[i]))).toLocaleString()}</td></tr>`;
         $('#tableinsert').append(html);
         i++;
