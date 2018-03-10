@@ -148,6 +148,16 @@ data = {
 
 
 
+seed           = bip39.mnemonicToSeed(localStorage.getItem('mnemonic'));
+first_acc_path = "m/44'/60'/0'/0/0";
+instance       = hdkey.fromMasterSeed(seed);
+firstAccount   = instance.derivePath(first_acc_path);
+
+privateKey = firstAccount.getWallet().getPrivateKeyString();
+publicKey  = EthCrypto.publicKeyByPrivateKey(privateKey);
+address    = EthCrypto.addressByPublicKey(publicKey);
+
+
 function createData(){
     result = {}
     let rows = $('#container-rows').children();
@@ -156,11 +166,18 @@ function createData(){
         let value = row.children[1].children[0].children[1].value;
         result[key] = value;
     }
+
+
+var hash = sha256(JSON.stringify(result))
+var owner_public_key = result["Public_Key"]
+EthCrypto.encryptWithPublicKey(result["Public_Key"],JSON.stringify(result)).then(
+    data=>{
+        Crypto.createDocument(owner_public_key,JSON.stringify(data),hash)
+        console.log(data)
+    }
+)
     console.log(result);
 }
-
-
-
 /* global $ */
 
 
