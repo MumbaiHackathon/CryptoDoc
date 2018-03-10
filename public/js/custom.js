@@ -128,48 +128,18 @@ function submit(id){
 }
 
 function getTransactions(){
-    result = {
-        'rows': [
-            {
-                'txid': 'txid1',
-                'datetime': 'datetime1',
-            },
-            {
-                'txid': 'txid2',
-                'datetime': 'datetime2',
-            },
-            {
-                'txid': 'txid3',
-                'datetime': 'datetime3',
-            },
-            {
-                'txid': 'txid4',
-                'datetime': 'datetime4',
-            },
-            {
-                'txid': 'txid5',
-                'datetime': 'datetime5',
-            },
-            {
-                'txid': 'txid6',
-                'datetime': 'datetime6',
-            },
-            {
-                'txid': 'txid7',
-                'datetime': 'datetime7',
-            },
-        ]
-    } //get this from localStorage, this is for testing
-
-    result.rows.forEach(element => {
-        txid = element.txid;
-        datetime = element.datetime;
+    result = [];
+    i = 0;
+    txid = localStorage.getItem('transactions').split(",");
+    datetime = localStorage.getItem('datetime').split(",");
+    txid.forEach(element => {
+        
         let html = `<tr>
-        <td><a href="https://rinkeby.etherscan.io/tx/${txid}">${txid}</a></td>
-        <td>${datetime}</td></tr>`;
+        <td><a href="https://rinkeby.etherscan.io/tx/${element}">${element}</a></td>
+        <td>${Date(parseInt(datetime[i]))}</td></tr>`;
         $('#tableinsert').append(html);
+        i++;
     });
-
 }//getTransaction end
 
 data = {
