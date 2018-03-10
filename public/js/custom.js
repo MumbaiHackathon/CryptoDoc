@@ -1,4 +1,3 @@
-
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyCFvdyOMOYbfr5qNrcZDtMAQ6LrZwV3nXs",
@@ -7,80 +6,78 @@ var config = {
     projectId: "dj-hack",
     storageBucket: "dj-hack.appspot.com",
     messagingSenderId: "61128737185"
-  };
+};
 
-  firebase.initializeApp(config);
-  const db = firebase.database();
-  dbRef = db.ref('/requests');
+firebase.initializeApp(config);
+const db = firebase.database();
+dbRef = db.ref('/requests');
 
-  function send(result) {
-      const id = result.address;
-        db.ref('requests/' + id).set({
-            data: result.data,
-            type: result.type
+function send(result) {
+    const id = result.address;
+    db.ref('requests/' + id).set({
+        data: result.data,
+        type: result.type
     });
-  };
+};
 
-  function retrieve() {
-      dbRef.on("child_added", (snap) => {
+function retrieve() {
+    dbRef.on("change", (snap) => {
         console.log(snap.val());
-      });
-  }
+    });
+}
 
 
-
-
-  function verify(type='success',data){
-      retrieve();
+function verify(type = 'success', data) {
+    retrieve();
     swal({
-        title: "Fetching data",
-        text: "Recieving encrypted data..",
-        imageUrl: '../img/loading.gif',
-        timer: 3000,
-        showConfirmButton: false,
+            title: "Fetching data",
+            text: "Recieving encrypted data..",
+            imageUrl: '../img/loading.gif',
+            timer: 3000,
+            showConfirmButton: false,
         },
-        function(){
+        function() {
             swal({
-                title: "Fetching public key",
-                text: "Fetching public key from sender..",
-                imageUrl: '../img/loading.gif',
-                timer: 3000,
-                showConfirmButton: false,
-            },
-            function(){
-                swal({
-                title: "Decrypting data",
-                text: "Decrypting data using key...",
-                imageUrl: '../img/loading.gif',
-                timer: 3000,
-                showConfirmButton: false,
+                    title: "Fetching public key",
+                    text: "Fetching public key from sender..",
+                    imageUrl: '../img/loading.gif',
+                    timer: 3000,
+                    showConfirmButton: false,
                 },
-                function(){
-                    if(type == 'success'){
-                        swal({
-                            title: "Success!",
-                            text: "Successfully verified user data...",
-                            type: "success",
+                function() {
+                    swal({
+                            title: "Decrypting data",
+                            text: "Decrypting data using key...",
+                            imageUrl: '../img/loading.gif',
+                            timer: 3000,
+                            showConfirmButton: false,
                         },
-                        function(){
-                            $('#info_holder').removeClass("hidden");
-                            $('#info_holder').addClass("animated bounceInRight");
+                        function() {
+                            if (type == 'success') {
+                                swal({
+                                        title: "Success!",
+                                        text: "Successfully verified user data...",
+                                        type: "success",
+                                    },
+                                    function() {
+                                        $('#info_holder').removeClass("hidden");
+                                        $('#info_holder').addClass("animated bounceInRight");
+                                    }
+                                );
+                            } else {
+                                swal({
+                                    title: "Warning!",
+                                    text: "Data was not verified...",
+                                    type: "error",
+                                });
+                            }
                         }
                     );
-                    }else{
-                        swal({
-                            title: "Warning!",
-                            text: "Data was not verified...",
-                            type: "error",
-                        });
-                    }
                 }
-                );
-            }
             );
         }
     );
-    for(key in data){
+    for (key in data) {
         let html = `<h4 class="card-title">${key}</h4>
         <p class="card-content">
             ${data[key]}
@@ -92,7 +89,7 @@ var config = {
 }
 
 
-function addRow(){
+function addRow() {
 
     html = `
 
@@ -116,18 +113,18 @@ function addRow(){
     $('#container-rows').append(html);
 }
 
-function submit(id){
+function submit(id) {
     var index = -1;
-    if(id == 'aadhar'){
-         index = 0;
+    if (id == 'aadhar') {
+        index = 0;
     }
 
-    if(id == 'pan'){
-         index = 1;
+    if (id == 'pan') {
+        index = 1;
     }
 
-    if(id == 'certificate'){
-         index = 2;
+    if (id == 'certificate') {
+        index = 2;
     }
     address = $('#' + id).val();
     type = id;
@@ -138,10 +135,10 @@ function submit(id){
     }
 
     console.log(index)
-    // send(result);
+        // send(result);
 }
 
-function getTransactions(){
+function getTransactions() {
     result = [];
     i = 0;
     txid = localStorage.getItem('transactions').split(",");
@@ -154,57 +151,54 @@ function getTransactions(){
         $('#tableinsert').append(html);
         i++;
     });
-}//getTransaction end
+} //getTransaction end
 
 data = {
-    'key1': 'value1',
-    'key2': 'value1',
-    'key3': 'value1',
-}//test data for verify display
+        'key1': 'value1',
+        'key2': 'value1',
+        'key3': 'value1',
+    } //test data for verify display
 
 
 
-seed           = bip39.mnemonicToSeed(localStorage.getItem('mnemonic'));
+seed = bip39.mnemonicToSeed(localStorage.getItem('mnemonic'));
 first_acc_path = "m/44'/60'/0'/0/0";
-instance       = hdkey.fromMasterSeed(seed);
-firstAccount   = instance.derivePath(first_acc_path);
+instance = hdkey.fromMasterSeed(seed);
+firstAccount = instance.derivePath(first_acc_path);
 
 privateKey = firstAccount.getWallet().getPrivateKeyString();
-publicKey  = EthCrypto.publicKeyByPrivateKey(privateKey);
-address    = EthCrypto.addressByPublicKey(publicKey);
+publicKey = EthCrypto.publicKeyByPrivateKey(privateKey);
+address = EthCrypto.addressByPublicKey(publicKey);
 
 
 
 
-function createData(){
- var transactions = localStorage.getItem("transactions").split(",")
-var datetime = localStorage.getItem("datetime").split(",")
+function createData() {
+    var transactions = localStorage.getItem("transactions").split(",")
+    var datetime = localStorage.getItem("datetime").split(",")
     result = {}
     let rows = $('#container-rows').children();
-    for(let row of rows){
+    for (let row of rows) {
         let key = row.children[0].children[0].children[1].value;
         let value = row.children[1].children[0].children[1].value;
         result[key] = value;
     }
 
 
-var hash = sha256(JSON.stringify(result))
-var owner_public_key = result["Public_Key"]
+    var hash = sha256(JSON.stringify(result))
+    var owner_public_key = result["Public_Key"]
 
-EthCrypto.encryptWithPublicKey(result["Public_Key"],JSON.stringify(result)).then(
-    data=>{
-        Crypto.createDocument(owner_public_key,JSON.stringify(data),hash,function(e,d){
-            transactions.push(d);
-            datetime.push(String(Date.now()));
-localStorage.setItem("datetime",String(datetime))
-localStorage.setItem("transactions",String(transactions))
-        })
-        console.log(data)
-    }
-)
+    EthCrypto.encryptWithPublicKey(result["Public_Key"], JSON.stringify(result)).then(
+        data => {
+            Crypto.createDocument(owner_public_key, JSON.stringify(data), hash, function(e, d) {
+                transactions.push(d);
+                datetime.push(String(Date.now()));
+                localStorage.setItem("datetime", String(datetime))
+                localStorage.setItem("transactions", String(transactions))
+            })
+            console.log(data)
+        }
+    )
     console.log(result);
 }
 /* global $ */
-
-
-
