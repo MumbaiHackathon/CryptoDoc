@@ -14,16 +14,14 @@ const web3 = new Web3(provider);
 const deploy = (async() => {
     //Get a list of all accounts
     const accounts = await web3.eth.getAccounts();
-
-    console.log("Attempting to deploy from account ", accounts[0]);
-    console.log(JSON.parse(interface)  )
-    const result = await new web3.eth.Contract (JSON.parse(interface))
-    .deploy({ data: bytecode, arguments: [] })
-    .send({ from: accounts[0], gas: '3000000' });
+    var result = await new web3.eth.Contract (JSON.parse(interface))
+    result = await result.deploy({ data: bytecode, arguments: [] })
+    result = await result.send({ from: accounts[0], gas: '3000000' });
 
 
     console.log("Contract deployed at ", result.options.address);
+    console.log("ABI: ",result.options.jsonInterface);
     var prefs = new Preferences('cryptodoc');
     prefs.address = result.options.address;
-    prefs.abi = interface
+    prefs.abi = JSON.stringify(result.options.jsonInterface);
 })();
