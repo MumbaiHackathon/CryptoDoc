@@ -1,4 +1,32 @@
-function verify(type='success',data){
+
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyCFvdyOMOYbfr5qNrcZDtMAQ6LrZwV3nXs",
+    authDomain: "dj-hack.firebaseapp.com",
+    databaseURL: "https://dj-hack.firebaseio.com",
+    projectId: "dj-hack",
+    storageBucket: "dj-hack.appspot.com",
+    messagingSenderId: "61128737185"
+  };
+
+  firebase.initializeApp(config);
+  const db = firebase.database();
+  dbRef = db.ref('/requests');
+
+  function send(result) {
+      const id = result.address;
+        db.ref('requests/' + id).set({
+            data: result.data,
+            type: result.type
+    });
+
+    dbRef.on('child_added', (snapshot) => {
+        console.log(snapshot.val());
+    });
+  };
+  
+  
+  function verify(type='success',data){
     swal({
         title: "Fetching data",
         text: "Recieving encrypted data..",
@@ -86,13 +114,12 @@ function addRow(){
 function submit(id){
     address = $('#' + id).val();
     type = id;
-    data = null; //insert data here
     result = {
         'address': address,
         'type': type,
         'data': data,
     }
-    console.log(result);
+    send(result);
 }
 
 function getTransactions(){
