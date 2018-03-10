@@ -19,9 +19,10 @@ function send(result) {
         type: result.type
     });
 };
-
+let fb = {};
 function retrieve() {
     dbRef.on("value", (snap) => {
+        fb = snap.val();
         console.log(snap.val());
     });
 }
@@ -77,8 +78,10 @@ function verify(type = 'success', data) {
             );
         }
     );
-    data_to_be_shown = { key1: "value1", key2: "value1", Yash: "Puthran" };
-    console.log(data_to_be_shown);
+  data_to_be_shown = { key1: "value1", key2: "value1", Yash: "Puthran" };
+EthCrypto.decryptWithPrivateKey(privateKey,fb['5813d4f8d84c5764b1afddb1eb284351e536754343d7add428c9e8460f76df03deff124704ea538708d68aee3f5e41b5b68a381eb994f3d4b859a0bfcd598aad']['data']).then((data) => data_to_be_shown=(data))
+
+    // console.log(data_to_be_shown);
     for (key in data_to_be_shown) {
         let html = `<h4 class="card-title">${key}</h4>
         <p class="card-content">
@@ -139,7 +142,7 @@ function submit(id) {
         'data': data,
     }
 
-    console.log("index", index)
+
     Crypto.documents(0, function(e, doc_add) {
         DocumentContract.at(doc_add).encrypted_data(function(e, doc) {
             EthCrypto.decryptWithPrivateKey(privateKey, JSON.parse(doc)).then(d => (EthCrypto.encryptWithPublicKey(address, d).then(
@@ -193,7 +196,8 @@ privateKey = firstAccount.getWallet().getPrivateKeyString();
 publicKey = EthCrypto.publicKeyByPrivateKey(privateKey);
 address = EthCrypto.addressByPublicKey(publicKey);
 
-
+privateKey2 = "0x1068e1d200d2bd3140445afec1ac7829f0012b87ff6c646f6b01023c95db13c8";
+publicKey2 = "19095de907dde35066bfb780f520cc5a026463f6dc0e8acde90bebf6691d5bf0ed503338414631fc5b6ccc8cad7487ad2c76ee1813a370ae14803912f43d8fd7";
 
 
 function createData() {
