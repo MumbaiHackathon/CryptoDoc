@@ -117,6 +117,18 @@ function addRow(){
 }
 
 function submit(id){
+    var index = -1;
+    if(id == 'aadhar'){
+         index = 0;
+    }
+
+    if(id == 'pan'){
+         index = 1;
+    }
+
+    if(id == 'certificate'){
+         index = 2;
+    }
     address = $('#' + id).val();
     type = id;
     result = {
@@ -124,7 +136,9 @@ function submit(id){
         'type': type,
         'data': data,
     }
-    send(result);
+
+    console.log(index)
+    // send(result);
 }
 
 function getTransactions(){
