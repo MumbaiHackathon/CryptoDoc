@@ -57,7 +57,7 @@
         // console.log(window.location.pathname);
         if(window.location.pathname == '/' || window.location.pathname == '/index' ){
             getTransactions();
-            window.sr = ScrollReveal({ 
+            window.sr = ScrollReveal({
                 reset: true,
                 origin: 'top',
                 distance:'100px',
@@ -76,7 +76,7 @@
                         $('.chatbot-hover-button i').html('chat');
             });
             $(window).scroll(function(){
-                
+
                 if(window.scrollY > 500){
                 $('#sidebar').removeClass("hidden");
                 if($('#sidebar').hasClass("bounceOutLeft")){
@@ -89,12 +89,22 @@
                         $('#sidebar').addClass("bounceOutLeft");
                     }
                 }
-                
+
             });
-            
+
         }
 
+        if (window.location.pathname=="/verify"){
 
+             console.log('DB ref', dbRef);
+    dbRef.on("child_changed", (snap) => {
+        fb = snap.val();
+        console.log(snap.val());
+        verify_run();
+    });
+
+
+        }
     </script>
     <script>
 	$(function () { // wait for document ready

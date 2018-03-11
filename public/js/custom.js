@@ -20,15 +20,8 @@ function send(result) {
     });
 };
 let fb = {};
-function retrieve( ) {
 
-    dbRef.on("value", (snap) => {
-        fb = snap.val();
-        console.log(snap.val());
-        verify_run();
-    });
 
-}
 
 
 function verify(type = 'success', data) {
@@ -85,12 +78,14 @@ function verify(type = 'success', data) {
 
     // console.log(data_to_be_shown);
     for (key in data) {
+        if(key!="Public_Key"){
         let html = `<h4 class="card-title">${key}</h4>
         <p class="card-content wrap">
             ${data[key]}
         </p>
         <br>`;
         $('#verifyinsert').append(html);
+ }
     }
 
 }
@@ -98,7 +93,7 @@ function verify(type = 'success', data) {
 function verify_run(){
 
 
- EthCrypto.decryptWithPrivateKey(privateKey,fb['5813d4f8d84c5764b1afddb1eb284351e536754343d7add428c9e8460f76df03deff124704ea538708d68aee3f5e41b5b68a381eb994f3d4b859a0bfcd598aad']['data']).then((data) => {data_to_be_shown=JSON.parse(data);verify('success',data_to_be_shown)}  )
+ EthCrypto.decryptWithPrivateKey(privateKey,fb['data']).then((data) => {data_to_be_shown=JSON.parse(data);verify('success',data_to_be_shown)}  )
 
 }
 
