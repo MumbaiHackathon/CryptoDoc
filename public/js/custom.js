@@ -21,6 +21,7 @@ function send(result) {
 };
 let fb = {};
 
+<<<<<<< HEAD
     dbRef.on("child_changed", (snap) => {
         fb = snap.val();
         console.log(snap.val());
@@ -28,6 +29,9 @@ let fb = {};
     });
 
 
+=======
+
+>>>>>>> aa5e378252d2b77c2636c3126fab88d6155d1bc0
 
 
 function verify(type = 'success', data) {
@@ -84,12 +88,14 @@ function verify(type = 'success', data) {
 
     // console.log(data_to_be_shown);
     for (key in data) {
+        if(key!="Public_Key"){
         let html = `<h4 class="card-title">${key}</h4>
         <p class="card-content wrap">
             ${data[key]}
         </p>
         <br>`;
         $('#verifyinsert').append(html);
+ }
     }
 
 }
@@ -97,8 +103,7 @@ function verify(type = 'success', data) {
 function verify_run(){
 
 
- EthCrypto.decryptWithPrivateKey(privateKey,fb['data']).then((data) => {data_to_be_shown=JSON.parse(data);
-    verify('success',data_to_be_shown)}  )
+ EthCrypto.decryptWithPrivateKey(privateKey,fb['data']).then((data) => {data_to_be_shown=JSON.parse(data);verify('success',data_to_be_shown)}  )
 
 }
 
