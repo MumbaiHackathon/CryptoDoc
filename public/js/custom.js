@@ -22,7 +22,7 @@ function send(result) {
 let fb = {};
 function retrieve( ) {
 
-    dbRef.on("value", (snap) => {
+    dbRef.on("child_changed", (snap) => {
         fb = snap.val();
         console.log(snap.val());
         verify_run();
