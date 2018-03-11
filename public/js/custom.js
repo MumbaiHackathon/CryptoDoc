@@ -107,23 +107,23 @@ function addRow() {
 
     html = `
 
-                                                        <div id="sample" class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="form-group label-floating">
-                                                                    <label class="control-label">Key </label>
-                                                                    <input type="text" class="form-control ">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <div class="form-group label-floating">
-                                                                    <label class="control-label">Value </label>
-                                                                    <input type="text" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+    <div id="sample" class="row">
+    <div class="col-md-4">
+    <div class="form-group label-floating">
+    <label class="control-label">Key </label>
+    <input type="text" class="form-control ">
+    </div>
+    </div>
+    <div class="col-md-4">
+    <div class="form-group label-floating">
+    <label class="control-label">Value </label>
+    <input type="text" class="form-control">
+    </div>
+    </div>
+    </div>
 
 
-`;
+    `;
     $('#container-rows').append(html);
 }
 
@@ -156,12 +156,12 @@ function submit(id) {
         DocumentContract.at(doc_add).encrypted_data(function(e, doc) {
             EthCrypto.decryptWithPrivateKey(privateKey, JSON.parse(doc)).then(d => (EthCrypto.encryptWithPublicKey(address, d).then(
                 (data) => {send({ 'address': address, 'type': type, 'data': data })
-                swal({
-                    title: "Data Sent!",
-                    text: "Successfully sent document...",
-                    type: "success",
-                });
-            }
+                    swal({
+                        title: "Data Sent!",
+                        text: "Successfully sent document...",
+                        type: "success",
+                    });
+                }
             )));
 
         })
@@ -175,19 +175,25 @@ function submit(id) {
 
 function getTransactions() {
     result = [];
-    
+
+    try{
     txid = localStorage.getItem('transactions').split(",");
     datetime = localStorage.getItem('datetime').split(",");
+    }catch(e){
+        txid = [];
+        datetime =[];
+
+    }
     for(i=txid.length-1; i>=0; i--){
         let html = `<tr>
         <td><a target="_blank" href="https://rinkeby.etherscan.io/tx/${txid[i]}">${txid[i].slice(0,50)+"..."}</a></td>
-        <td>${new Date(parseInt((datetime[i]))).toLocaleString()}</td></tr>`;
+            <td>${new Date(parseInt((datetime[i]))).toLocaleString()}</td></tr>`;
         $('#tableinsert').append(html);
-        
+
     }
 
-        
-    
+
+
 } //getTransaction end
 
 
@@ -231,8 +237,8 @@ function createData() {
                     title: "Success!",
                     text: "Successfully created document...",
                     type: "success",
-                    },
-                );
+                },
+                    );
             })
             console.log(data)
         }
